@@ -1,0 +1,26 @@
+name: Check Dependencies
+description: Checks if dependencies bewteen two branches have changed.
+
+runs:
+  using: 'node20'
+  main: 'action.js'
+
+inputs:
+  current-sha:
+    description: The git SHA for the current branch (e.g. `github.sha`).
+    required: true
+  base-sha:
+    description: The git SHA for the branch to compare against (e.g. `github.base_ref`).
+    required: true
+  package-name:
+    description: When set, will only check to see if the given package has changed.
+    required: false
+  package-type:
+    description: |
+      The type of dependency the package is classified as. Allowed values are:
+      "base", "dev", "peer", and "optional". The default is "base".
+    required: false
+
+outputs:
+  divergent:
+    description: Indicates if there are any dependency changes.
